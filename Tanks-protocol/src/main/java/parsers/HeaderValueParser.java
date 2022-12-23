@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class HeaderValueParser {
     private final String COLON_COUNT_EXCEPTION_MESSAGE = "Invalid colon (':') char count, should be 1";
@@ -23,15 +21,24 @@ public class HeaderValueParser {
         } else {
             throw new ColonCountException(COLON_COUNT_EXCEPTION_MESSAGE);
         }
-        return matcher.group();
+        return matcher.group().substring(1);
     }
 
-    public boolean hasOneColon(String line) {
+    private boolean hasOneColon(String line) {
         int count = 0;
         for (char c : line.toCharArray()) {
             if (c == ':')
                 count++;
         }
         return count == 1;
+    }
+
+    public boolean isNumericValue(String line) {
+        try {
+            Double.parseDouble(line);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
