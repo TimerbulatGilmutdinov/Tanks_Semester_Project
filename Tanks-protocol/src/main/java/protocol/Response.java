@@ -7,6 +7,9 @@ import java.util.Map;
 
 public class Response {
     private MethodName methodName;
-    private Message message;
-    private Map<String,String> headersMap = new HashMap<>();
+    private final Message message;
+
+    public Response(Message message) {
+        this.message = message;
+    }
 }
