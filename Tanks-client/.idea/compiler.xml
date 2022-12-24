@@ -6,8 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Tanks-client" />
+        <module name="net" />
+        <module name="core" />
+        <module name="desktop" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="assets" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
