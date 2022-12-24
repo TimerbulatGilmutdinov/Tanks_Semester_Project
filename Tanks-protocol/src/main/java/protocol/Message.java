@@ -1,5 +1,8 @@
 package protocol;
 
-public abstract class Message {
+import lombok.Data;
+
+@Data
+public class Message {
     private Content content;
 }
