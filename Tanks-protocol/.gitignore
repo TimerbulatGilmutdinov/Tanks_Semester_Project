@@ -8,5 +8,6 @@ hs_err_pid*
 
 target/
 
+.idea/
 out/
 *.iml
