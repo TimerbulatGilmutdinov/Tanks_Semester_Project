@@ -4,12 +4,14 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import ru.kpfu.itis.Game;
 import ru.kpfu.itis.WindowConfig;
 import ru.kpfu.itis.api.Renderable;
 import ru.kpfu.itis.api.Updatable;
+import ru.kpfu.itis.constant.Direction;
 import ru.kpfu.itis.util.AngleChanger;
 
 public abstract class Tank implements Updatable, Renderable {
@@ -26,6 +28,7 @@ public abstract class Tank implements Updatable, Renderable {
     float fireTimer;
     Color hpTextureColor;
     Rectangle textureRectangle;
+    Direction direction;
 
     public Tank(Game game, Vector2 position) {
         this.game = game;
@@ -33,23 +36,15 @@ public abstract class Tank implements Updatable, Renderable {
     }
 
     @Override
-    public void renderWithScale(SpriteBatch batch, Texture texture, float x, float y) {
-        batch.draw(texture, x, y, texture.getWidth(), texture.getHeight());
-    }
-
-    @Override
-    public void renderWithScale(SpriteBatch batch, Texture texture, float x, float y, float angle) {
-        batch.draw(texture, x, y,
-                (float) texture.getWidth() / 2,
-                (float) texture.getHeight() / 2,
-                texture.getWidth(),
-                texture.getHeight(),
-                1, 1,
-                turretAngle,
-                0, 0,
-                texture.getWidth(),
-                texture.getHeight(),
-                false, false);
+    public void render(SpriteBatch batch, TextureRegion textureRegion, float x, float y, float angle) {
+        batch.draw(textureRegion,
+                x - (float) textureRegion.getRegionWidth() / 2,
+                y - (float) textureRegion.getRegionHeight() / 2,
+                (float) textureRegion.getRegionWidth() / 2,
+                (float) textureRegion.getRegionHeight() / 2,
+                textureRegion.getRegionWidth(),
+                textureRegion.getRegionHeight(),
+                1, 1, angle);
     }
 
     @Override

@@ -2,9 +2,10 @@ package ru.kpfu.itis.api;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public interface Renderable {
-    default void render(SpriteBatch batch, Texture texture) {
+    default void render(SpriteBatch batch, TextureRegion textureRegion) {
         throw new UnsupportedOperationException();
     }
 
@@ -16,11 +17,11 @@ public interface Renderable {
         throw new UnsupportedOperationException();
     }
 
-    default void renderWithScale(SpriteBatch batch, Texture texture, float x, float y) {
+    default void render(SpriteBatch batch, TextureRegion textureRegion, float x, float y) {
         throw new UnsupportedOperationException();
     }
 
-    default void renderWithScale(SpriteBatch batch, Texture texture, float x, float y, float angle) {
+    default void render(SpriteBatch batch, TextureRegion textureRegion, float x, float y, float angle) {
         throw new UnsupportedOperationException();
     }
 }

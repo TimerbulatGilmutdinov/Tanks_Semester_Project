@@ -1,19 +1,19 @@
 package ru.kpfu.itis.constant;
 
 public enum TankInfo {
-    RED("red_tank.png", "red_turret.png"),
-    GREEN("green_tank.png", "green_turret.png"),
-    BLUE("blue_tank.png", "blue_turret.png"),
-    YELLOW("yellow_tank.png", "yellow_turret.png");
+    RED("red_tank", "red_turret"),
+    GREEN("green_tank", "green_turret"),
+    BLUE("blue_tank", "blue_turret"),
+    YELLOW("yellow_tank", "yellow_turret");
 
     private final String name;
     private final String turretFileName;
 
-    public String getFileName() {
+    public String getRegionName() {
         return name;
     }
 
-    public String getTurretFileName() {
+    public String getTurretRegionName() {
         return turretFileName;
     }
 
