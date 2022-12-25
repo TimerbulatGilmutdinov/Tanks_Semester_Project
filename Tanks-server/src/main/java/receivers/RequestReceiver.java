@@ -1,10 +1,8 @@
 package receivers;
 
-import constants.MethodName;
+import exceptions.IllegalHeaderNameException;
 import parsers.HeaderParser;
 import parsers.HeaderValueParser;
-import protocol.Content;
-import protocol.Message;
 import protocol.Request;
 
 import java.io.BufferedInputStream;
@@ -50,7 +48,7 @@ public class RequestReceiver {
         return data;
     }
 
-    public void setHeadersMap(List<String> argsList) {
+    public void setHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
         for (String line : argsList) {
             headersMap.put(headerParser.parseHeader(line), headerValueParser.parseValue(line));
         }

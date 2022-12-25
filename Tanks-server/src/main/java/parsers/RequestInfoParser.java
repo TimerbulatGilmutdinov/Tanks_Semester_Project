@@ -72,7 +72,7 @@ public class RequestInfoParser {
         return matcher.group().substring(1);
     }
 
-    public String buildRegexForProtocolEntity(){
+    private String buildRegexForProtocolEntity(){
         Entity[] entities = Entity.values();
         StringBuilder regex = new StringBuilder();
         regex.append("(");
