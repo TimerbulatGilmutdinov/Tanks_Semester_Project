@@ -1,34 +1,25 @@
 
+import exceptions.IllegalHeaderNameException;
 import exceptions.IllegalProtocolInfoException;
+import parsers.HeaderParser;
+import parsers.HeaderValueParser;
 import parsers.RequestInfoParser;
 import receivers.RequestReceiver;
 
 import java.io.*;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
-    static List<String> argsList = new ArrayList<>();
-    static Socket client;
-    static void setClient() throws IOException{
-        client = new Socket("127.0.0.1",8080);
-    }
-    public static void main(String[] args) throws IOException, IllegalProtocolInfoException {
-//        ServerSocket serverSocket = new ServerSocket(8080);
-//        serverSocket.accept();
-//        setClient();
-//
-//        BufferedOutputStream outputStream = new BufferedOutputStream(client.getOutputStream());
-//        outputStream.write("TANK_COORD_X:14".getBytes());
-//        outputStream.write("TANK_COORD_Y:11".getBytes());
-//        outputStream.write("TURRET_ANGLE:14".getBytes());
+    public static void main(String[] args) throws IOException, IllegalProtocolInfoException, IllegalHeaderNameException {
         InputStream inputStream = new BufferedInputStream(new FileInputStream("pom.xml"));
 
         RequestReceiver requestReceiver = new RequestReceiver(inputStream);
         System.out.println(requestReceiver.getArgsList());
 
         RequestInfoParser parser = new RequestInfoParser();
-        System.out.println(parser.parseVersion("CONNECT ALL : tnkp/1.0"));
+        System.out.println(parser.parseEntity("CONNECT tnkp/1.0"));
+        HeaderValueParser headerParser = new HeaderValueParser();
+        System.out.println(headerParser.parseValue("TANK_COORD_X:5.9"));
+        HeaderParser headerParser1 = new HeaderParser();
+        System.out.println(headerParser1.parseHeader("TANK_COORD_X:11.8"));
     }
 }

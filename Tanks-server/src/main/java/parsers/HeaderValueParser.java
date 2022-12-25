@@ -1,34 +1,29 @@
 package parsers;
 
+import util.RequestLineChecker;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static util.RequestLineChecker.ILLEGAL_SAMPLE_MESSAGE;
+
 public class HeaderValueParser {
-    private final String COLON_COUNT_EXCEPTION_MESSAGE = "Invalid colon (':') char count, should be 1";
     private Pattern pattern;
     private Matcher matcher;
 
-    public String parseValue(String requestLine)  {
-        if (hasOneColon(requestLine)) {
-            String regex = ":[\\s\\d\\w.]+";
-            pattern = Pattern.compile(regex);
-            matcher = pattern.matcher(requestLine);
-            matcher.find();
+    private final RequestLineChecker checker = new RequestLineChecker();
+
+    public String parseValue(String requestLine) {
+        if (!checker.hasCorrectSample(requestLine)) {
+            throw new IllegalArgumentException(ILLEGAL_SAMPLE_MESSAGE);
         }
-//        else {
-//            throw new ColonCountException(COLON_COUNT_EXCEPTION_MESSAGE);
-//        }
+        String regex = ":[\\d.]+[0-9]";
+        pattern = Pattern.compile(regex);
+        matcher = pattern.matcher(requestLine);
+        matcher.find();
+
         String result = matcher.group();
         return result.substring(1);
-    }
-
-    private boolean hasOneColon(String line) {
-        int count = 0;
-        for (char c : line.toCharArray()) {
-            if (c == ':')
-                count++;
-        }
-        return count == 1;
     }
 
     public boolean isNumericValue(String line) {

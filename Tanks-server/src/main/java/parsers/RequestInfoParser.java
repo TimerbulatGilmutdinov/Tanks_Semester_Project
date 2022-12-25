@@ -62,6 +62,9 @@ public class RequestInfoParser {
     }
 
     public String parseEntity(String requestLine) throws IllegalProtocolInfoException{
+        if(parseMethod(requestLine).equals(MethodName.CONNECT.name())){
+            return "";
+        }
         String regex = buildRegexForProtocolEntity();
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(requestLine);
