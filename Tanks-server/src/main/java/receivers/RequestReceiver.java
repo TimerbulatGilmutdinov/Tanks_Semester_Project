@@ -15,22 +15,22 @@ import java.util.*;
 
 public class RequestReceiver {
     private final BufferedInputStream inputStream;
-    private Content content;
-    private List<String> argsList;
-    private List<String> headersList;
-    private List<String> headerValueList;
-    private HeaderParser headerParser = new HeaderParser();
-    private HeaderValueParser headerValueParser = new HeaderValueParser();
-    private Map<String, String> headersMap = new HashMap<>();
+    private final List<String> argsList = new ArrayList<>();
+    private final List<String> headersList = new ArrayList<>();
+    private final List<String> headerValueList = new ArrayList<>();
+    private final HeaderParser headerParser = new HeaderParser();
+    private final HeaderValueParser headerValueParser = new HeaderValueParser();
+    private final Map<String, String> headersMap = new HashMap<>();
 
     public RequestReceiver(InputStream inputStream) {
         this.inputStream = new BufferedInputStream(inputStream);
     }
 
-    public String[] getArgsList() {
+    public List<String> getArgsList() {
         String data = convertInputStreamDataToString();
         String[] res = data.split("\r?\n|\r");
-        return res;
+        Collections.addAll(argsList,res);
+        return argsList;
     }
 
     public String convertInputStreamDataToString() {
@@ -56,7 +56,7 @@ public class RequestReceiver {
         }
     }
 
-    public Request getRequest(Message message) {
-        return new Request(MethodName.GET_ALL, headersMap);
+    public Request getRequest() {
+        return null;
     }
 }

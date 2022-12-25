@@ -1,3 +1,9 @@
+
+import exceptions.IllegalProtocolMethodException;
+import exceptions.IllegalProtocolNameException;
+import parsers.HeaderParser;
+import parsers.HeaderValueParser;
+import parsers.RequestInfoParser;
 import receivers.RequestReceiver;
 
 import java.io.*;
@@ -13,7 +19,7 @@ public class Main {
     static void setClient() throws IOException{
         client = new Socket("127.0.0.1",8080);
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, IllegalProtocolMethodException, IllegalProtocolNameException {
 //        ServerSocket serverSocket = new ServerSocket(8080);
 //        serverSocket.accept();
 //        setClient();
@@ -25,6 +31,9 @@ public class Main {
         InputStream inputStream = new BufferedInputStream(new FileInputStream("pom.xml"));
 
         RequestReceiver requestReceiver = new RequestReceiver(inputStream);
-        System.out.println(Arrays.toString(requestReceiver.getArgsList()));
+        System.out.println(requestReceiver.getArgsList());
+
+        RequestInfoParser parser = new RequestInfoParser();
+        System.out.println(parser.parseVersion("CONNECT ALL : tnkp/1.0"));
     }
 }

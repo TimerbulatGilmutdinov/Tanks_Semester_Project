@@ -12,7 +12,7 @@ public class HeaderValueParser {
 
     public String parseValue(String requestLine)  {
         if (hasOneColon(requestLine)) {
-            String regex = ":[\\d\\w.]+";
+            String regex = ":[\\s\\d\\w.]+";
             pattern = Pattern.compile(regex);
             matcher = pattern.matcher(requestLine);
             matcher.find();
