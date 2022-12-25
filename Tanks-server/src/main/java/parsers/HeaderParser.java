@@ -5,14 +5,14 @@ import exceptions.ColonCountException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class HeaderValueParser {
+public class HeaderParser {
     private final String COLON_COUNT_EXCEPTION_MESSAGE = "Invalid colon (':') char count, should be 1";
     private Pattern pattern;
     private Matcher matcher;
 
-    public String parseValue(String requestLine)  {
+    public String parseHeader(String requestLine)  {
         if (hasOneColon(requestLine)) {
-            String regex = ":[\\d\\w.]+";
+            String regex = "[\\d\\w]+:";
             pattern = Pattern.compile(regex);
             matcher = pattern.matcher(requestLine);
             matcher.find();
@@ -21,7 +21,7 @@ public class HeaderValueParser {
 //            throw new ColonCountException(COLON_COUNT_EXCEPTION_MESSAGE);
 //        }
         String result = matcher.group();
-        return result.substring(1);
+        return result.substring(0,result.length()-1);
     }
 
     private boolean hasOneColon(String line) {
@@ -31,14 +31,5 @@ public class HeaderValueParser {
                 count++;
         }
         return count == 1;
-    }
-
-    public boolean isNumericValue(String line) {
-        try {
-            Double.parseDouble(line);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 }
