@@ -4,7 +4,6 @@ import constants.Entity;
 import constants.MethodName;
 import exceptions.IllegalHeaderNameException;
 import exceptions.IllegalProtocolInfoException;
-import lombok.Getter;
 import parsers.HeaderParser;
 import parsers.HeaderValueParser;
 import parsers.RequestInfoParser;
@@ -19,7 +18,7 @@ public class RequestReceiver {
     private final HeaderParser headerParser = new HeaderParser();
     private final HeaderValueParser headerValueParser = new HeaderValueParser();
     private final RequestInfoParser requestInfoParser = new RequestInfoParser();
-    private final Map<String, String> headersMap = new HashMap<>();
+    private final Map<String, Float> headersMap = new HashMap<>();
     private String requestInfoLine;
 
     public RequestReceiver(InputStream inputStream) {
@@ -36,7 +35,7 @@ public class RequestReceiver {
             String line;
             while (true) {
                 line = reader.readLine();
-                if (line.isEmpty()) {
+                if (line==null||line.isEmpty()) {
                     return;
                 }
                 argsList.add(line);
@@ -46,10 +45,10 @@ public class RequestReceiver {
         }
     }
 
-    public Map<String, String> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
+    public Map<String, Float> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
         for (String line : argsList) {
             if (line.contains(":")) {
-                headersMap.put(headerParser.parseHeader(line), headerValueParser.parseValue(line));
+                headersMap.put(headerParser.parseHeader(line), Float.valueOf(headerValueParser.parseValue(line)));
             }
         }
         return headersMap;
