@@ -14,9 +14,9 @@ public class Request {
     private final MethodName methodName;
     private final Entity entity;
     private final String version;
-    private final Map<String,String> headersMap;
+    private final Map<String,Float> headersMap;
 
-    public Request(MethodName methodName, Entity entity, String version, Map<String,String> headersMap){
+    public Request(MethodName methodName, Entity entity, String version, Map<String,Float> headersMap){
         this.methodName = methodName;
         this.entity = entity;
         this.version = version;

@@ -5,5 +5,6 @@ public enum HeaderName {
     TANK_COORD_Y,
     TANK_ANGLE,
     TURRET_ANGLE,
-    BULLET_DIRECTION
+    BULLET_DIRECTION_X,
+    BULLET_DIRECTION_Y
 }
