@@ -13,7 +13,6 @@ import protocol.Request;
 import java.io.*;
 import java.util.*;
 
-@Getter
 public class RequestReceiver {
     private final BufferedInputStream inputStream;
     private final List<String> argsList = new ArrayList<>();
@@ -25,33 +24,22 @@ public class RequestReceiver {
 
     public RequestReceiver(InputStream inputStream) {
         this.inputStream = new BufferedInputStream(inputStream);
-        setArgsList();
-        setRequestInfoLine();
-    }
-
-    private void setArgsList() {
-        String data = convertInputStreamDataToString();
-        String[] res = data.split("\r?\n|\r");
-        Collections.addAll(argsList, res);
     }
 
     private void setRequestInfoLine() {
         requestInfoLine = argsList.get(0);
     }
 
-    public String convertInputStreamDataToString() {
-        StringBuilder data = new StringBuilder();
+    public void setArgsList() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while((line = reader.readLine())!=null){
-                System.out.println(line);
-                data.append(line);
+                argsList.add(line);
             }
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
-        return data.toString();
     }
 
     public Map<String, String> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
@@ -64,6 +52,8 @@ public class RequestReceiver {
     }
 
     public Request getRequest() throws IllegalHeaderNameException, IllegalProtocolInfoException {
+        setArgsList();
+        setRequestInfoLine();
         return Request.builder()
                 .methodName(MethodName.valueOf(requestInfoParser.parseMethod(requestInfoLine)))
                 .entity(Entity.valueOf(requestInfoParser.parseEntity(requestInfoLine)))
