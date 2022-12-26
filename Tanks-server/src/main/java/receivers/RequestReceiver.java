@@ -30,11 +30,15 @@ public class RequestReceiver {
         requestInfoLine = argsList.get(0);
     }
 
-    public void setArgsList() {
+    private void setArgsList() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            while((line = reader.readLine())!=null){
+            while (true) {
+                line = reader.readLine();
+                if (line.isEmpty()) {
+                    return;
+                }
                 argsList.add(line);
             }
         } catch (IOException e) {
