@@ -10,10 +10,7 @@ import parsers.HeaderValueParser;
 import parsers.RequestInfoParser;
 import protocol.Request;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 @Getter
@@ -29,37 +26,35 @@ public class RequestReceiver {
     public RequestReceiver(InputStream inputStream) {
         this.inputStream = new BufferedInputStream(inputStream);
         setArgsList();
-        setFirstLine();
+        setRequestInfoLine();
     }
 
     private void setArgsList() {
         String data = convertInputStreamDataToString();
         String[] res = data.split("\r?\n|\r");
-        Collections.addAll(argsList,res);
+        Collections.addAll(argsList, res);
     }
 
-    private void setFirstLine(){
+    private void setRequestInfoLine() {
         requestInfoLine = argsList.get(0);
     }
 
-    private String convertInputStreamDataToString() {
-        String data;
+    public String convertInputStreamDataToString() {
+        StringBuilder data = new StringBuilder();
         try {
-            BufferedInputStream bStream = new BufferedInputStream(inputStream);
-            ByteArrayOutputStream baous = new ByteArrayOutputStream();
-            int temp = bStream.read();
-            while (temp != -1) {
-                baous.write((byte) temp);
-                temp = bStream.read();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while((line = reader.readLine())!=null){
+                System.out.println(line);
+                data.append(line);
             }
-            data = baous.toString("UTF-8");
         } catch (IOException e) {
             throw new IllegalArgumentException(e);
         }
-        return data;
+        return data.toString();
     }
 
-    public Map<String,String> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
+    public Map<String, String> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
         for (String line : argsList) {
             if (line.contains(":")) {
                 headersMap.put(headerParser.parseHeader(line), headerValueParser.parseValue(line));
