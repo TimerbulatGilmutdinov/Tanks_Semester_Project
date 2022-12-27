@@ -33,10 +33,9 @@ Typical server response
 <br>{empty line}
 
 ### <br /> Authors of the project
-***
 ***Gilmutdinov Timerbulat<br/>***
 ***timerhelmut@gmail.com<br/>***
 ***Telegram: @bulatinogg***
 ***
 ***Gafiatullin Aidar<br/>***
-***Telegram: Ai_7790***
+***Telegram: @Ai_7790***
