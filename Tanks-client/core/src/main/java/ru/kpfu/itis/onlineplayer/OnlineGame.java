@@ -2,10 +2,8 @@ package ru.kpfu.itis.onlineplayer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import protocol.Response;
 import ru.kpfu.itis.Game;
-import ru.kpfu.itis.ResponseParser;
-import ru.kpfu.itis.ResponseReceiver;
+import ru.kpfu.itis.receivers.ResponseReceiver;
 import ru.kpfu.itis.constant.TankInfo;
 import ru.kpfu.itis.emitter.BulletEmitter;
 import ru.kpfu.itis.entity.Player;
@@ -34,7 +32,7 @@ public class OnlineGame extends Game {
         enemy = new Enemy(this, enemyStartPosition);
         bulletEmitter = new BulletEmitter();
         try {
-            responseReceiver = new ResponseReceiver(socket);
+            responseReceiver = new ResponseReceiver(socket.getInputStream());
         } catch (IOException e) {
             throw new RuntimeException();
         }

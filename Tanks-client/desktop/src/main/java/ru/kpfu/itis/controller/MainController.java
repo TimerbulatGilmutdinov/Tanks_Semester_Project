@@ -6,7 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import ru.kpfu.itis.Client;
+import ru.kpfu.itis.Connection;
 import ru.kpfu.itis.DesktopLauncher;
 import ru.kpfu.itis.constant.TankInfo;
 
@@ -35,7 +35,7 @@ public class MainController {
                     @Override
                     public void run() {
                         try {
-                            Socket socket = new Client().searchMatch();
+                            Socket socket = new Connection().searchMatch();
                             searchText.setVisible(false);
                             DesktopLauncher.startGame(
                                     new Vector2(random.nextInt(1000),
