@@ -17,7 +17,6 @@ public class ResponseSender {
     }
 
     public void sendResponse(Response response) throws ServerException {
-        Map<String, Float> headersMap = response.getHeadersMap();
         OutputStreamWriter writer = new OutputStreamWriter(outputStream);
         try {
             writer.write(response.toString());
