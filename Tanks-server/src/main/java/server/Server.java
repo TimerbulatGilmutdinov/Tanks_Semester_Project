@@ -34,6 +34,7 @@ public class Server {
             started = true;
 
             for (int i = 1; i < MAX_PLAYERS_COUNT; i++) {
+                allPlayersDataMap.put(i,new PlayerData());
                 Socket client = server.accept();
                 handleConnection(client);
             }

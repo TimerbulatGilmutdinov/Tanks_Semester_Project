@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Getter
 public class Connection implements Runnable {
-    private static int count = 0;
+    private static int count = 1;
     protected int id;
     protected Server server;
     protected Socket socket;
