@@ -16,6 +16,6 @@ public class RequestSender {
 
     public void sendRequest(Request request) throws IOException {
         OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-        writer.write(request.getMethodName().toString() + request.getEntity() + request.getVersion());
+        writer.write(request.toString());
     }
 }
