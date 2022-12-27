@@ -21,7 +21,16 @@ Typical examples of requests
 <br>BULLET_DIRECTION_X:67.2
 <br>BULLET_DIRECTION_Y:57.4
 <br>{empty line}
-   
+
+Typical server response
+1. 200 tnkp/1.0
+<br>TANK_COORD_X:18.9
+<br>TANK_COORD_Y:56.4
+<br>TANK_ANGLE:18.6
+<br>TURRET_ANGLE:56.1
+<br>BULLET_DIRECTION_X:67.2
+<br>BULLET_DIRECTION_Y:57.4
+<br>{empty line}
 
 ### <br /> Authors of the project
 ***
