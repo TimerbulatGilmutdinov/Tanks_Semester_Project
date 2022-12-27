@@ -3,6 +3,7 @@ package server;
 import constants.MethodName;
 import exceptions.IllegalHeaderNameException;
 import exceptions.IllegalProtocolInfoException;
+import exceptions.ServerException;
 import listeners.AbstractServerEventListener;
 import listeners.PostListener;
 import listeners.ServerEventListener;
@@ -48,14 +49,17 @@ public class Connection implements Runnable {
     @Override
     public void run() {
         Request request;
-
+        int connectRequestCount = 0;
         try {
             while ((request = requestReceiver.getRequest()) != null) {
                 ServerEventListener listener = AbstractServerEventListener.getEventListener(
                         request.getMethodName());
                 listener.init(server);
-                if (request.getMethodName() == MethodName.CONNECT) {
+                if (request.getMethodName() == MethodName.CONNECT && connectRequestCount <= 1) {
                     listener.handle(this, request);
+                    connectRequestCount++;
+                } else {
+                    throw new ServerException("One client can only connect 1 time during the game session!");
                 }
                 if (request.getMethodName() == MethodName.GET) {
                     listener.handle(this, request);
@@ -64,7 +68,7 @@ public class Connection implements Runnable {
                     listener.handle(this, request);
                 }
             }
-        } catch (IllegalHeaderNameException | IllegalProtocolInfoException e) {
+        } catch (IllegalHeaderNameException | IllegalProtocolInfoException | ServerException e) {
             e.printStackTrace();
         }
     }
