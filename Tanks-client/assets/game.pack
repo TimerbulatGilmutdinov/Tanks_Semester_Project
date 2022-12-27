@@ -1,5 +1,5 @@
 
-gamepack.png
+game.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -59,9 +59,16 @@ yellow_turret
   orig: 67, 60
   offset: 0, 0
   index: -1
+bar
+  rotate: false
+  xy: 553, 51
+  size: 64, 10
+  orig: 64, 10
+  offset: 0, 0
+  index: -1
 bullet
   rotate: false
-  xy: 553, 54
+  xy: 553, 42
   size: 7, 7
   orig: 7, 7
   offset: 0, 0

@@ -21,14 +21,14 @@ public class Player extends Tank {
 
     private final TextureRegion textureRegion;
     private final TextureRegion turretTextureRegion;
-    private final Texture hpTexture = null;
 
 
     public Player(Game game, Vector2 position, TankInfo tankInfo) {
-        super(game, position);
+        super(game, position, MAX_HP);
         textureRegion = GameAtlas.TEXTURE_ATLAS.findRegion(tankInfo.getRegionName());
         turretTextureRegion = GameAtlas.TEXTURE_ATLAS.findRegion(tankInfo.getTurretRegionName());
         textureRectangle = new Rectangle(position.x, position.y, textureRegion.getRegionWidth(), textureRegion.getRegionHeight());
+        hp = MAX_HP;
     }
 
     @Override
@@ -49,10 +49,12 @@ public class Player extends Tank {
                 position.y - halfTextureHeight,
                 turretAngle
         );
+        renderHp(batch, textureRegion);
     }
 
     @Override
     public void update(float dt) {
+        checkForScreenExit();
         textureRectangle.setPosition(
                 position.x - (float) textureRegion.getRegionWidth() / 2,
                 position.y - (float) textureRegion.getRegionHeight() / 2
@@ -62,7 +64,30 @@ public class Player extends Tank {
 
         rotateTurretAngle(mouseX, mouseY, dt);
         move(dt);
+        fireByKeyPressed();
         super.update(dt);
+    }
+
+    @Override
+    public void finish() {
+
+    }
+
+    private void checkForScreenExit() {
+        float textureWidth = textureRegion.getRegionWidth();
+        float textureHeight = textureRegion.getRegionHeight();
+        if (position.x - textureWidth / 2 <= 0) {
+            position.x = textureWidth / 2;
+        }
+        if (position.x + textureWidth / 2 >= Gdx.graphics.getWidth()) {
+            position.x = Gdx.graphics.getWidth() - textureWidth / 2;
+        }
+        if (position.y - textureHeight / 2 <= 0) {
+            position.y = textureHeight / 2;
+        }
+        if (position.y + textureHeight / 2 + HP_TEXTURE_GROWTH >= Gdx.graphics.getHeight()) {
+            position.y = Gdx.graphics.getHeight() - textureHeight / 2 - HP_TEXTURE_GROWTH;
+        }
     }
 
     public void fireByKeyPressed() {

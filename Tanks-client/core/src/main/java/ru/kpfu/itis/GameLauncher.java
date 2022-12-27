@@ -1,13 +1,14 @@
 package ru.kpfu.itis;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import ru.kpfu.itis.constant.TankInfo;
 import ru.kpfu.itis.onlineplayer.OnlineGame;
 
 public class GameLauncher extends ApplicationAdapter {
     private final Game game;
 
-    public GameLauncher() {
-        this.game = new OnlineGame();
+    public GameLauncher(Game game) {
+        this.game = game;
     }
 
     @Override
