@@ -9,6 +9,6 @@ public class Main {
         InputStream inputStream = new BufferedInputStream(new FileInputStream("test.txt"));
 
         RequestReceiver requestReceiver = new RequestReceiver(inputStream);
-        System.out.println(requestReceiver.getRequest().getHeadersMap());
+        System.out.println(requestReceiver.getRequest());
     }
 }

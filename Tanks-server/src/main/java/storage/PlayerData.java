@@ -16,7 +16,7 @@ public class PlayerData {
     private float bullet_direction_x;
     private float getBullet_direction_y;
 
-    public PlayerData(int id, String name){
+    public PlayerData(int id){
         this.id = id;
     }
 }
