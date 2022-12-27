@@ -63,7 +63,9 @@
                     <execution>
                         <id>unpacknatives</id>
                         <phase>pre-integration-test</phase>
-                        <goals><goal>copy</goal></goals>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
