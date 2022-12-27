@@ -17,11 +17,8 @@ public class PostListener extends AbstractServerEventListener{
 
     @Override
     public void handle(Connection connection, Request request) {
-    }
-
-    public void handle(Connection connection, Response response){
         PlayerData playerData = playerDataMap.get(connection.getId());
-        ActualPlayerDataWriter playerDataWriter = new ActualPlayerDataWriter(response.getHeadersMap(),playerData);
+        ActualPlayerDataWriter playerDataWriter = new ActualPlayerDataWriter(request.getHeadersMap(),playerData);
         playerDataWriter.writePlayerData();
     }
 }

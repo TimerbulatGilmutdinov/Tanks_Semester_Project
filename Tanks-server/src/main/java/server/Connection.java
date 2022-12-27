@@ -4,6 +4,7 @@ import constants.MethodName;
 import exceptions.IllegalHeaderNameException;
 import exceptions.IllegalProtocolInfoException;
 import listeners.AbstractServerEventListener;
+import listeners.PostListener;
 import listeners.ServerEventListener;
 import lombok.Getter;
 import protocol.Request;
@@ -47,26 +48,24 @@ public class Connection implements Runnable {
     @Override
     public void run() {
         Request request;
-        Response response;
 
         try {
-            try {
-                while ((request = requestReceiver.getRequest()) != null) {
-                    //TODO все поставить в правильный порядок
-                    ServerEventListener listener = AbstractServerEventListener.getEventListener(
-                            request.getMethodName());
-                    listener.init(server);
-                    response = responseBuilder.getResponse();
-                    responseSender.sendResponse(response);
-                    if (request.getMethodName() == MethodName.CONNECT) {
-                        listener.handle(this, request);
-                    }
+            while ((request = requestReceiver.getRequest()) != null) {
+                ServerEventListener listener = AbstractServerEventListener.getEventListener(
+                        request.getMethodName());
+                listener.init(server);
+                if (request.getMethodName() == MethodName.CONNECT) {
+                    listener.handle(this, request);
                 }
-            } catch (IllegalHeaderNameException | IllegalProtocolInfoException e) {
-                e.printStackTrace();
+                if (request.getMethodName() == MethodName.GET) {
+                    listener.handle(this, request);
+                }
+                if (request.getMethodName() == MethodName.POST) {
+                    listener.handle(this, request);
+                }
             }
-        } catch (IOException e) {
-            this.server.removeConnection(this);
+        } catch (IllegalHeaderNameException | IllegalProtocolInfoException e) {
+            e.printStackTrace();
         }
     }
 }
