@@ -1,8 +1,8 @@
 package ru.kpfu.itis.receivers;
 
-import exceptions.IllegalHeaderNameException;
 import protocol.Response;
 import ru.kpfu.itis.exceptions.IllegalProtocolInfoException;
+import ru.kpfu.itis.exceptions.IllegalHeaderNameException;
 import ru.kpfu.itis.parsers.HeaderParser;
 import ru.kpfu.itis.parsers.HeaderValueParser;
 import ru.kpfu.itis.parsers.ResponseInfoParser;
@@ -46,7 +46,7 @@ public class ResponseReceiver {
         }
     }
 
-    public Map<String, Float> getHeadersMap(List<String> argsList) throws exceptions.IllegalHeaderNameException {
+    public Map<String, Float> getHeadersMap(List<String> argsList) throws IllegalHeaderNameException {
         for (String line : argsList) {
             if (line.contains(":")) {
                 headersMap.put(headerParser.parseHeader(line), Float.valueOf(headerValueParser.parseValue(line)));
@@ -55,7 +55,7 @@ public class ResponseReceiver {
         return headersMap;
     }
 
-    public Response getResponse() throws IllegalHeaderNameException, IllegalProtocolInfoException {
+    public Response getResponse() throws IllegalProtocolInfoException, IllegalHeaderNameException {
         setArgsList();
         setRequestInfoLine();
         return Response.builder()
