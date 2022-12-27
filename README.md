@@ -7,7 +7,7 @@ Protocol concept
 4. Every certain period of time client sends GET ALL and POST ALL requests
 5. Server receives GET ALL and answers with response which contains all coordinates of enemy player
 6. Server receives POST ALL and writes actual data of player who sent this requset to the storage
-7. Client receives response and render enemy tank by the received data
+7. Client receives Server's response and render enemy tank by the received data
 8. Empty line is an end of a message
 
 Typical examples of requests
@@ -31,4 +31,3 @@ Typical examples of requests
 ***
 ***Gafiatullin Aidar<br/>***
 ***Telegram: Ai_7790***
-***
