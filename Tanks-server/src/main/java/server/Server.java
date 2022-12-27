@@ -18,7 +18,6 @@ public class Server {
     protected final String HANDLING_CONNECTION_ERROR = "Problem with handling connection";
 
     protected boolean started;
-    protected List<ServerEventListener> listeners = new ArrayList<>();
     protected ServerSocket server;
     protected List<Connection> connections = new ArrayList<>();
     protected Map<Integer, PlayerData> allPlayersDataMap = new HashMap<>();
@@ -55,14 +54,6 @@ public class Server {
             thread.start();
         } catch (IOException ex) {
             throw new ServerException(HANDLING_CONNECTION_ERROR, ex);
-        }
-    }
-
-    public void sendResponse(Connection connection, Response response) {
-        try {
-            connection.responseSender.sendResponse(response);
-        } catch (IOException e) {
-            removeConnection(connection);
         }
     }
 

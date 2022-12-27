@@ -3,11 +3,14 @@ package listeners;
 import constants.MethodName;
 import constants.ProtocolInfo;
 import constants.StatusCodes;
+import exceptions.ServerException;
 import protocol.Request;
 import protocol.Response;
+import senders.ResponseSender;
 import server.Connection;
 import storage.PlayerData;
 
+import java.io.IOException;
 import java.util.Collections;
 
 public class ConnectListener extends AbstractServerEventListener {
@@ -19,8 +22,8 @@ public class ConnectListener extends AbstractServerEventListener {
     public void handle(Connection connection, Request request) {
         PlayerData playerData = PlayerData.builder()
                 .id(connection.getId())
-                .tank_coord_x((float) Math.random()*100)
-                .tank_coord_y((float) Math.random()*100)
+                .tank_coord_x((float) Math.random() * 100)
+                .tank_coord_y((float) Math.random() * 100)
                 .tank_angle(0)
                 .turret_angle(0)
                 .bullet_direction_x(0)
@@ -33,6 +36,11 @@ public class ConnectListener extends AbstractServerEventListener {
                 .version(ProtocolInfo.VERSION)
                 .headersMap(Collections.emptyMap())
                 .build();
-        server.sendResponse(connection, response);
+        ResponseSender responseSender = new ResponseSender(connection.getOutputStream());
+        try {
+            responseSender.sendResponse(response);
+        } catch (ServerException e) {
+            server.removeConnection(connection);
+        }
     }
 }

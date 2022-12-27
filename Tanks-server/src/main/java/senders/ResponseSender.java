@@ -1,5 +1,6 @@
 package senders;
 
+import exceptions.ServerException;
 import protocol.Response;
 
 import java.io.BufferedOutputStream;
@@ -15,13 +16,17 @@ public class ResponseSender {
         this.outputStream = new BufferedOutputStream(outputStream);
     }
 
-    public void sendResponse(Response response) throws IOException {
+    public void sendResponse(Response response) throws ServerException {
         Map<String, Float> headersMap = response.getHeadersMap();
         OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-        writer.write(response.getStatusCode());
-        writer.write(response.getVersion());
-        for (String key : headersMap.keySet()) {
-            writer.write(key + ":" + headersMap.get(key));
+        try {
+            writer.write(response.getStatusCode());
+            writer.write(response.getVersion());
+            for (String key : headersMap.keySet()) {
+                writer.write(key + ":" + headersMap.get(key));
+            }
+        }catch (IOException e){
+            throw new ServerException(e);
         }
     }
 }
