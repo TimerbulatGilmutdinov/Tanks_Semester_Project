@@ -1,9 +1,8 @@
 package ru.kpfu.itis.receivers;
 
-import constants.StatusCodes;
 import exceptions.IllegalHeaderNameException;
-import exceptions.IllegalProtocolInfoException;
 import protocol.Response;
+import ru.kpfu.itis.exceptions.IllegalProtocolInfoException;
 import ru.kpfu.itis.parsers.HeaderParser;
 import ru.kpfu.itis.parsers.HeaderValueParser;
 import ru.kpfu.itis.parsers.ResponseInfoParser;
@@ -56,7 +55,7 @@ public class ResponseReceiver {
         return headersMap;
     }
 
-    public Response getResponse() throws IllegalProtocolInfoException, IllegalHeaderNameException {
+    public Response getResponse() throws IllegalHeaderNameException, IllegalProtocolInfoException {
         setArgsList();
         setRequestInfoLine();
         return Response.builder()

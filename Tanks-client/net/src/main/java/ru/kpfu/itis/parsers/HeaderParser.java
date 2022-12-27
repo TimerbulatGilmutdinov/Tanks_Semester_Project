@@ -2,7 +2,7 @@ package ru.kpfu.itis.parsers;
 
 import constants.HeaderName;
 import exceptions.IllegalHeaderNameException;
-import util.RequestLineChecker;
+import ru.kpfu.itis.util.RequestLineChecker;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

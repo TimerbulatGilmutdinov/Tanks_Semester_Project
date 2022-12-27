@@ -1,9 +1,8 @@
 package ru.kpfu.itis.parsers;
 
-import constants.MethodName;
 import constants.ProtocolInfo;
 import constants.StatusCodes;
-import exceptions.IllegalProtocolInfoException;
+import ru.kpfu.itis.exceptions.IllegalProtocolInfoException;
 
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
