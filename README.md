@@ -2,7 +2,7 @@
 
 Protocol concept
 1. Name of protocol tnkp. Now it has version 1.0
-2. It has 3 types of messages: CONNECT, GET ALL, POST ALL
+2. It has 3 types of messages: CONNECT, GET ALL, POST ALL, and server Responses with particular status codes
 3. When user connects he sends CONNECT request to the server then he joins map
 4. Every certain period of time client sends GET ALL and POST ALL requests
 5. Server receives GET ALL and answers with response which contains all coordinates of enemy player
