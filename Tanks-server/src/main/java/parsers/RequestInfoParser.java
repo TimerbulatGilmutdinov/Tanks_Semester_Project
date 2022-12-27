@@ -39,7 +39,7 @@ public class RequestInfoParser {
     }
 
     public String parseVersion(String requestLine) throws IllegalProtocolInfoException {
-        String regex = ProtocolInfo.NAME + "/" + ProtocolInfo.VERSION;
+        String regex = ProtocolInfo.VERSION;
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(requestLine);
 

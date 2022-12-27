@@ -1,13 +1,14 @@
 package storage;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+@Builder
 @Getter
 @Setter
 public class PlayerData {
     private final int id;
-    private final String name;
     private float tank_coord_x;
     private float tank_coord_y;
     private float tank_angle;
@@ -17,6 +18,5 @@ public class PlayerData {
 
     public PlayerData(int id, String name){
         this.id = id;
-        this.name = name;
     }
 }

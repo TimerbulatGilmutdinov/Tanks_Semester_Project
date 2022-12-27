@@ -35,7 +35,7 @@ public class RequestReceiver {
             String line;
             while (true) {
                 line = reader.readLine();
-                if (line==null||line.isEmpty()) {
+                if (line == null || line.isEmpty()) {
                     return;
                 }
                 argsList.add(line);
