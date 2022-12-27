@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 import ru.kpfu.itis.Connection;
 import ru.kpfu.itis.DesktopLauncher;
 import ru.kpfu.itis.constant.TankInfo;
+import ru.kpfu.itis.exceptions.IllegalHeaderNameException;
+import ru.kpfu.itis.exceptions.IllegalProtocolInfoException;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -45,6 +47,8 @@ public class MainController {
                             );
                         } catch (IOException | InterruptedException e) {
                             throw new RuntimeException();
+                        } catch (IllegalHeaderNameException | IllegalProtocolInfoException e) {
+                            e.printStackTrace();
                         }
                     }
                 }).start();
