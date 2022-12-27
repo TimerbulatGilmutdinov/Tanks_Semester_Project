@@ -1,8 +1,6 @@
 package server;
 
 import exceptions.ServerException;
-import listeners.ServerEventListener;
-import protocol.Response;
 import storage.PlayerData;
 
 import java.io.IOException;

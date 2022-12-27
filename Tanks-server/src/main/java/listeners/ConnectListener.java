@@ -10,7 +10,6 @@ import senders.ResponseSender;
 import server.Connection;
 import storage.PlayerData;
 
-import java.io.IOException;
 import java.util.Collections;
 
 public class ConnectListener extends AbstractServerEventListener {
@@ -41,6 +40,7 @@ public class ConnectListener extends AbstractServerEventListener {
             responseSender.sendResponse(response);
         } catch (ServerException e) {
             server.removeConnection(connection);
+            throw new IllegalArgumentException(e);
         }
     }
 }

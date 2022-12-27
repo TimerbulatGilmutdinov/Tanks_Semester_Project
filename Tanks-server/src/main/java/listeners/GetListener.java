@@ -1,13 +1,13 @@
 package listeners;
 
 import constants.MethodName;
+import exceptions.ServerException;
 import protocol.Request;
 import senders.ResponseSender;
 import server.Connection;
 import storage.PlayerData;
 import util.ResponseBuilder;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +28,8 @@ public class GetListener extends AbstractServerEventListener {
             responseBuilder = new ResponseBuilder(allPlayersDataMap.get(requestedPlayerId));
             try {
                 responseSender.sendResponse(responseBuilder.getResponse());
-            } catch (IOException e) {
+            } catch (ServerException e) {
+                server.removeConnection(connection);
                 throw new IllegalArgumentException(e);
             }
         }

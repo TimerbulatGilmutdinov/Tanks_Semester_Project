@@ -2,7 +2,6 @@ package listeners;
 
 import constants.MethodName;
 import protocol.Request;
-import protocol.Response;
 import server.Connection;
 import storage.PlayerData;
 import util.ActualPlayerDataWriter;
