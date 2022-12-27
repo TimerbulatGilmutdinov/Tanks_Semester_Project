@@ -1,6 +1,6 @@
 package ru.kpfu.itis.parsers;
 
-import util.RequestLineChecker;
+import ru.kpfu.itis.util.RequestLineChecker;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
