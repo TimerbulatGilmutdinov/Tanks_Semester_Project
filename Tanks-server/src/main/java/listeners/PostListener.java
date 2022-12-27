@@ -2,8 +2,10 @@ package listeners;
 
 import constants.MethodName;
 import protocol.Request;
+import protocol.Response;
 import server.Connection;
 import storage.PlayerData;
+import util.ActualPlayerDataWriter;
 
 import java.util.Map;
 
@@ -15,8 +17,11 @@ public class PostListener extends AbstractServerEventListener{
 
     @Override
     public void handle(Connection connection, Request request) {
-//        PlayerData playerData = playerDataMap.get(connection.getId());
-//        ActualPlayerDataWriter playerDataWriter = new ActualPlayerDataWriter(response.getHeadersMap(),playerData);
-//        playerDataWriter.writePlayerData();
+    }
+
+    public void handle(Connection connection, Response response){
+        PlayerData playerData = playerDataMap.get(connection.getId());
+        ActualPlayerDataWriter playerDataWriter = new ActualPlayerDataWriter(response.getHeadersMap(),playerData);
+        playerDataWriter.writePlayerData();
     }
 }

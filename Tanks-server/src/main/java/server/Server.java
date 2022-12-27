@@ -14,8 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Server {
-    protected boolean started;
+    protected final String STARTING_SERVER_ERROR = "Problem with server starting";
+    protected final String HANDLING_CONNECTION_ERROR = "Problem with handling connection";
 
+    protected boolean started;
     protected List<ServerEventListener> listeners = new ArrayList<>();
     protected ServerSocket server;
     protected List<Connection> connections = new ArrayList<>();
@@ -39,7 +41,7 @@ public class Server {
                 handleConnection(client);
             }
         } catch (IOException ex) {
-            throw new ServerException("Problem with server starting.", ex);
+            throw new ServerException(STARTING_SERVER_ERROR, ex);
         }
     }
 
@@ -52,7 +54,7 @@ public class Server {
             Thread thread = new Thread(connection);
             thread.start();
         } catch (IOException ex) {
-            throw new ServerException("Problem with handling connection.", ex);
+            throw new ServerException(HANDLING_CONNECTION_ERROR, ex);
         }
     }
 
