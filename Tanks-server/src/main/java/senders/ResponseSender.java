@@ -20,11 +20,7 @@ public class ResponseSender {
         Map<String, Float> headersMap = response.getHeadersMap();
         OutputStreamWriter writer = new OutputStreamWriter(outputStream);
         try {
-            writer.write(response.getStatusCode());
-            writer.write(response.getVersion());
-            for (String key : headersMap.keySet()) {
-                writer.write(key + ":" + headersMap.get(key));
-            }
+            writer.write(response.toString());
         }catch (IOException e){
             throw new ServerException(e);
         }
