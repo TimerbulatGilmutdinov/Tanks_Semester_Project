@@ -22,4 +22,22 @@ public class Request {
         this.version = version;
         this.headersMap = headersMap;
     }
+
+    @Override
+    public String toString() {
+         StringBuilder stringBuilder = new StringBuilder();
+         stringBuilder.append(methodName)
+                 .append(" ")
+                 .append(entity)
+                 .append(" ")
+                 .append(version)
+                 .append("\n");
+         for(String header:headersMap.keySet()){
+             stringBuilder.append(header)
+                     .append(":")
+                     .append(headersMap.get(header))
+                     .append("\n");
+         }
+         return stringBuilder.toString();
+    }
 }

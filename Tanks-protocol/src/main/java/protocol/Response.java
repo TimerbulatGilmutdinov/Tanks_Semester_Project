@@ -21,4 +21,14 @@ public class Response {
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(statusCode).append(" ").append(version).append("\n");
+        for(String header: headersMap.keySet()){
+            stringBuilder.append(header).append(" ").append(headersMap.get(header)).append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }
