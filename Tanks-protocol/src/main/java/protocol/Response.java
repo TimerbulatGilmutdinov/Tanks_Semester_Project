@@ -27,7 +27,7 @@ public class Response {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(statusCode).append(" ").append(version).append("\n");
         for(String header: headersMap.keySet()){
-            stringBuilder.append(header).append(" ").append(headersMap.get(header)).append("\n");
+            stringBuilder.append(header).append(":").append(headersMap.get(header)).append("\n");
         }
         return stringBuilder.toString();
     }
