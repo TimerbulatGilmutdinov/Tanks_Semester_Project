@@ -53,11 +53,11 @@ public class Connection implements Runnable {
             try {
                 while ((request = requestReceiver.getRequest()) != null) {
                     //TODO все поставить в правильный порядок
-                    response = responseBuilder.getResponse();
-                    responseSender.sendResponse(response);
                     ServerEventListener listener = AbstractServerEventListener.getEventListener(
                             request.getMethodName());
                     listener.init(server);
+                    response = responseBuilder.getResponse();
+                    responseSender.sendResponse(response);
                     if (request.getMethodName() == MethodName.CONNECT) {
                         listener.handle(this, request);
                     }
